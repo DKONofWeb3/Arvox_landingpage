@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Arvox</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3 {
+      font-family: 'Poppins', sans-serif;
+    }
+
+.card:hover {
+  transform: translateY(-10px) scale(1.01);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.15);
+}
+.glow {
+  box-shadow: 0 0 80px rgba(255,255,255,0.2);
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(120px);
+  animation: blobMove 25s infinite alternate ease-in-out;
+}
+
+@keyframes blobMove {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(200px, -150px) scale(1.1);
+  }
+  100% {
+    transform: translate(-150px, 200px) scale(0.9);
+  }
+}
+.faq-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.3s ease;
+}
+
+.faq-content.open {
+  opacity: 1;
+}
+
+
+.section {
+  opacity: 0;
+  transform: scale(0.97);
+  transition: all 1s ease;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.card {
+  transform-style: preserve-3d;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+
+  </style>
+</head>
+<body class="bg-white scroll-smooth snap-y snap-mandatory overflow-y-scroll">
+<div id="loader" class="fixed inset-0 z-[999] bg-black flex items-center justify-center text-white text-4xl font-bold">
+  Arvox
+</div>
+
+    <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+  <div class="blob bg-white/30 w-[600px] h-[600px] top-[-200px] left-[-200px]"></div>
+  <div class="blob bg-white/20 w-[500px] h-[500px] top-[40%] right-[-200px]"></div>
+  <div class="blob bg-white/10 w-[700px] h-[700px] bottom-[-300px] left-[20%]"></div>
+</div>
+<canvas id="particles" class="fixed inset-0 -z-10"></canvas>
+    <nav id="navbar" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-white/70 backdrop-blur-xl border border-black/10 shadow-xl rounded-full px-6 py-3 shadow-md transition-all duration-300">
+  <div class="flex items-center gap-8 text-sm font-medium text-slate-800">
+    <div class="font-bold">Arvox</div>
+    <a href="#" class="hover:text-black">How it works</a>
+    <a href="#" class="hover:text-black">Jobs</a>
+    <a href="#" class="hover:text-black">Payments</a>
+    <a href="#" class="bg-black text-white px-4 py-2 rounded-full text-sm">Join waitlist</a>
+  </div>
+</nav>
+<section class="section min-h-screen bg-[#5DE0E6] snap-start flex items-center justify-center px-6 pt-32">
+  <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-16 items-center reveal">
+
+    <!-- Text -->
+    <div>
+      <h1 class="text-5xl md:text-6xl font-bold leading-tight text-[#0D1B2A]">
+        Where Web3 Talent <br />
+        Meets Real Opportunities
+      </h1>
+
+      <p class="mt-6 text-lg text-[#1E293B] max-w-xl">
+        Arvox is a focused Web3 jobs and bounties platform built for experienced, job-ready professionals and serious projects. No noise. No guesswork. Just verified opportunities and competent talent.
+      </p>
+
+      <div class="mt-10 flex gap-4">
+        <a href="#how-it-works" class="bg-black text-white px-6 py-3 rounded-full font-medium hover:bg-[#007CF0] transition">
+          Explore How It Works
+        </a>
+
+        <a href="#waitlist" class="border border-black px-6 py-3 rounded-full font-medium text-black hover:bg-black hover:text-white transition">
+          Get Early Access
+        </a>
+      </div>
+    </div>
+
+    <!-- Visual Placeholder -->
+    <div class="relative">
+      <div class="card glow w-full aspect-[4/5] bg-white/30 backdrop-blur-lg rounded-3xl border border-white/40 shadow-2xl flex items-center justify-center text-[#0D1B2A] font-semibold">
+        Platform Preview
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section min-h-screen bg-[#FF6F61] snap-start px-6 py-32 flex items-center">
+  <div class="max-w-7xl mx-auto w-full reveal">
+
+
+    <!-- Headline -->
+    <div class="max-w-3xl mb-20 reveal">
+      <h2 class="text-4xl md:text-5xl font-bold text-white">
+        Hiring and Working in Web3 Is Broken
+      </h2>
+
+      <p class="mt-6 text-lg text-[#FFE8E6]">
+        Web3 talent is everywhere, yet hiring remains inefficient. Projects rely on timelines, Discord servers, and engagement posts to find workers, often attracting unqualified applicants, scammers, or people not ready to execute.
+ <br> <br>On the other side, skilled Web3 professionals struggle to find legitimate, paid opportunities. Jobs are scattered, unclear, underfunded, or disappear without accountability. The result is wasted time, broken trust, and stalled growth for both sides.
+    </p>
+    </div>
+
+    <!-- Pain Cards -->
+   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal">
+
+      <div class="card bg-white/10 backdrop-blur rounded-3xl p-8 border border-white/20">
+        <h3 class="text-xl font-semibold text-white mb-3">Noisy Hiring Channels</h3>
+        <p class="text-[#FFE8E6]">
+          Most Web3 hiring happens in chaotic group chats and social feeds, where serious talent is drowned out by spam and hype.
+        </p>
+      </div>
+
+     <div class="card bg-white/10 backdrop-blur rounded-3xl p-8 border border-white/20">
+        <h3 class="text-xl font-semibold text-white mb-3">Low-Quality Applicants</h3>
+        <p class="text-[#FFE8E6]">
+          Projects waste time filtering through people with no experience, fake portfolios, or zero intent to deliver real work.
+        </p>
+      </div>
+
+     <div class="card bg-white/10 backdrop-blur rounded-3xl p-8 border border-white/20">
+        <h3 class="text-xl font-semibold text-white mb-3">Unclear & Unpaid Work</h3>
+        <p class="text-[#FFE8E6]">
+          Job posts disappear, budgets change, and contributors are often left unpaid with no system to enforce accountability.
+        </p>
+      </div>
+
+    <div class="card bg-white/10 backdrop-blur rounded-3xl p-8 border border-white/20">
+        <h3 class="text-xl font-semibold text-white mb-3">No Real Structure</h3>
+        <p class="text-[#FFE8E6]">
+          There’s no standard way to list roles, track progress, or hold both sides accountable to timelines and payments.
+        </p>
+      </div>
+
+      <div class="card bg-white/10 backdrop-blur rounded-3xl p-8 border border-white/20">
+        <h3 class="text-xl font-semibold text-white mb-3">Talent Gets Missed</h3>
+        <p class="text-[#FFE8E6]">
+          Skilled professionals struggle to find legitimate work because opportunities are scattered across dozens of platforms.
+        </p>
+      </div>
+
+      <div class="card bg-white/10 backdrop-blur rounded-3xl p-8 border border-white/20">
+        <h3 class="text-xl font-semibold text-white mb-3">Trust Is Broken</h3>
+        <p class="text-[#FFE8E6]">
+          With no escrow or enforcement layer, both jobbers and projects hesitate to commit fully.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Closing line -->
+    <div class="mt-20 max-w-3xl">
+      <h2 class="text-4xl md:text-5xl font-bold text-white">
+        Arvox exists to fix this gap
+      </h2>
+    </div>
+
+  </div>
+</section>
+<section class="section min-h-screen bg-[#00BFA6] snap-start px-6 py-32 flex items-center">
+  <div class="max-w-7xl mx-auto w-full reveal">
+
+
+    <!-- Headline -->
+    <div class="max-w-3xl mb-20 reveal">
+      <h2 class="text-4xl md:text-5xl font-bold text-white">
+        A Structured Marketplace for Web3 Work
+      </h2>
+
+      <p class="mt-6 text-lg text-[#E0FFF9]">
+        Arvox is a Web3-focused hiring and opportunity platform designed to connect competent jobbers with verified projects in a structured, transparent environment.
+      </p>
+    </div>
+
+    <!-- Feature Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 reveal">
+
+      <!-- Jobs -->
+      <div class="card bg-white/15 backdrop-blur rounded-3xl p-8 border border-white/30">
+        <h3 class="text-xl font-semibold text-white mb-3">Web3 Jobs</h3>
+        <p class="text-[#E0FFF9]">
+          Full-time, part-time and contract roles from verified projects with clear pay, scope, and timelines.
+        </p>
+      </div>
+
+      <!-- Bounties -->
+      <div class="card bg-white/15 backdrop-blur rounded-3xl p-8 border border-white/30">
+        <h3 class="text-xl font-semibold text-white mb-3">Bounties</h3>
+        <p class="text-[#E0FFF9]">
+          Task-based work with fixed payouts. Contribute, deliver, and get paid without long-term commitments.
+        </p>
+      </div>
+
+      <!-- Payments -->
+      <div class="card bg-white/15 backdrop-blur rounded-3xl p-8 border border-white/30">
+        <h3 class="text-xl font-semibold text-white mb-3">Built-In Payments</h3>
+        <p class="text-[#E0FFF9]">
+          Every role is funded upfront. Weekly or monthly releases ensure no ghosting or unpaid labor.
+        </p>
+      </div>
+
+      <!-- Access Control -->
+      <div class="card bg-white/15 backdrop-blur rounded-3xl p-8 border border-white/30">
+        <h3 class="text-xl font-semibold text-white mb-3">Access Control</h3>
+        <p class="text-[#E0FFF9]">
+          Only skilled, verified users and serious projects get in — keeping the platform high signal.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Bottom copy -->
+    <div class="mt-20 max-w-4xl">
+      <p class="text-xl text-white font-medium">
+    Instead of hunting through social feeds or unmoderated communities, users access a curated system where jobs and bounties are organized by role, niche, payment range, and deadline. Projects get access to talent that is ready to deliver, while jobbers gain visibility to real opportunities that pay.    
+    </p>
+    </div>
+
+  </div>
+</section>
+<section class="section min-h-screen bg-[#A3E635] snap-start px-6 py-32 flex items-center">
+  <div class="max-w-7xl mx-auto w-full reveal">
+
+
+    <!-- Headline -->
+    <div class="max-w-3xl mb-20 reveal">
+      <h2 class="text-4xl md:text-5xl font-bold text-[#1A1A1A]">
+        How Arvox Works
+      </h2>
+    </div>
+
+    <!-- Two Column Flow -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 reveal">
+
+      <!-- Jobbers -->
+      <div class="card bg-white/60 rounded-3xl p-10 shadow-xl border border-black/10">
+        <h3 class="text-2xl font-bold text-[#1A1A1A] mb-8">For Jobbers</h3>
+
+        <div class="space-y-6">
+
+          <div class="flex gap-4">
+            <div class="font-bold text-xl">1</div>
+            <p>Create an account and complete your profile with your niche, proof of work, and professional details. </p>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="font-bold text-xl">2</div>
+            <p>Browse Web3 jobs and bounties tailored to your skills. Each listing includes clear requirements, timelines, and compensation details.</p>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="font-bold text-xl">3</div>
+            <p>Apply directly through Arvox by answering project-specific questions or submitting required links. No DMs. No chasing</p>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="font-bold text-xl">4</div>
+            <p>Projects fund roles upfront. Payments are released automatically at agreed intervals, ensuring accountability and protection for both parties</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Projects -->
+      <div class="card bg-white/60 rounded-3xl p-10 shadow-xl border border-black/10">
+        <h3 class="text-2xl font-bold text-[#1A1A1A] mb-8">For Projects</h3>
+
+        <div class="space-y-6">
+
+          <div class="flex gap-4">
+            <div class="font-bold text-xl">1</div>
+            <p>Post a role or bounty with clear scope, timeline, and payment.</p>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="font-bold text-xl">2</div>
+            <p>Review applications from skilled, pre-vetted Web3 professionals.</p>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="font-bold text-xl">3</div>
+            <p>Fund the role upfront. Arvox holds and releases payments on schedule.</p>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="font-bold text-xl">4</div>
+            <p>Get work delivered with accountability built into the system.</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<section class="section min-h-screen bg-[#007CF0] snap-start px-6 py-32 flex items-center">
+  <div class="max-w-7xl mx-auto w-full reveal">
+
+
+    <!-- Headline -->
+    <div class="max-w-3xl mb-20 reveal">
+      <h2 class="text-4xl md:text-5xl font-bold text-white">
+        Built-In Payments, Real Accountability
+      </h2>
+
+      <p class="mt-6 text-lg text-[#E0F0FF]">
+    Arvox enforces structured payment systems to protect both projects and jobbers. Projects fund roles based on agreed timelines (weekly or monthly), and payments are automatically released at the end of each cycle.    
+    </p>
+    </div>
+
+    <!-- Trust Blocks -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 reveal">
+
+     <div class="card bg-white/10 backdrop-blur rounded-3xl p-8 border border-white/20">
+        <h3 class="text-xl font-semibold text-white mb-4">Upfront Funding</h3>
+        <p class="text-[#E0F0FF]">
+          Every role is funded before work starts. Projects commit financially, and jobbers know the money is real.
+        </p>
+      </div>
+
+     <div class="card bg-white/10 backdrop-blur rounded-3xl p-8 border border-white/20">
+
+        <h3 class="text-xl font-semibold text-white mb-4">Scheduled Payouts</h3>
+        <p class="text-[#E0F0FF]">
+          Payments are released automatically on weekly or monthly cycles, based on the agreement.
+        </p>
+      </div>
+
+      <div class="card bg-white/10 backdrop-blur rounded-3xl p-8 border border-white/20">
+        <h3 class="text-xl font-semibold text-white mb-4">Wallet-Based</h3>
+        <p class="text-[#E0F0FF]">
+          Connect your wallet and receive payouts directly. No middlemen, no payment delays.
+        </p>
+      </div>
+
+     <div class="card bg-white/10 backdrop-blur rounded-3xl p-8 border border-white/20">
+        <h3 class="text-xl font-semibold text-white mb-4">Dispute Protection</h3>
+        <p class="text-[#E0F0FF]">
+          If obligations aren’t met, disputes can be raised and reviewed inside the platform.
+        </p>
+      </div>
+
+     <div class="card bg-white/10 backdrop-blur rounded-3xl p-8 border border-white/20">
+        <h3 class="text-xl font-semibold text-white mb-4">No Ghosting</h3>
+        <p class="text-[#E0F0FF]">
+          Funds only release when timelines are respected — eliminating disappearing projects and unpaid work.
+        </p>
+      </div>
+
+     <div class="card bg-white/10 backdrop-blur rounded-3xl p-8 border border-white/20">
+        <h3 class="text-xl font-semibold text-white mb-4">Aligned Incentives</h3>
+        <p class="text-[#E0F0FF]">
+          Both sides are motivated to perform, because money and reputation are on the line.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Closing -->
+    <div class="mt-20 max-w-4xl">
+      <p class="text-xl text-white font-medium">
+    Jobbers focus on delivering quality work, knowing payment is secured. Projects hire confidently, knowing funds are released only when timelines are met. If either party fails to meet obligations, disputes can be reported and reviewed.
+<br> <br>
+This removes uncertainty, ghosting, and unpaid work from the hiring process.  
+    </p>
+    </div>
+
+  </div>
+</section>
+<section class="section min-h-screen bg-[#FACC15] snap-start px-6 py-32 flex items-center">
+  <div class="max-w-7xl mx-auto w-full reveal">
+
+    <!-- Headline -->
+    <div class="max-w-3xl mb-20 reveal">
+      <h2 class="text-4xl md:text-5xl font-bold text-[#1E1E1E]">
+        Quality Over Volume
+      </h2>
+
+      <p class="mt-6 text-lg text-[#2E2E2E]">
+    Arvox is intentionally designed to prioritize competence over crowd size. The platform is built for people who understand Web3, can execute professionally, and want to work with serious teams.    
+    </p>
+    </div>
+
+    <!-- Content Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 reveal">
+
+      <div class="card bg-white/70 rounded-3xl p-10 border border-black/10 shadow-xl">
+        <h3 class="text-2xl font-bold mb-4 text-[#1E1E1E]">Controlled Access</h3>
+        <p class="text-[#2E2E2E]">
+          Users and projects go through screening before gaining full access. This keeps spam, fake roles, and unserious participants out.
+        </p>
+      </div>
+
+      <div class="card bg-white/70 rounded-3xl p-10 border border-black/10 shadow-xl">
+        <h3 class="text-2xl font-bold mb-4 text-[#1E1E1E]">Proof of Work</h3>
+        <p class="text-[#2E2E2E]">
+          Jobbers provide real portfolios and experience, ensuring projects only see people who can actually execute.
+        </p>
+      </div>
+
+      <div class="card bg-white/70 rounded-3xl p-10 border border-black/10 shadow-xl">
+        <h3 class="text-2xl font-bold mb-4 text-[#1E1E1E]">Project Verification</h3>
+        <p class="text-[#2E2E2E]">
+          Teams must demonstrate legitimacy and funding before listing roles or bounties on the platform.
+        </p>
+      </div>
+
+      <div class="card bg-white/70 rounded-3xl p-10 border border-black/10 shadow-xl">
+        <h3 class="text-2xl font-bold mb-4 text-[#1E1E1E]">High-Signal Marketplace</h3>
+        <p class="text-[#2E2E2E]">
+          By filtering aggressively, Arvox stays useful — where every listing and every applicant actually matters.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Closing -->
+    <div class="mt-20 max-w-4xl">
+      <p class="text-xl font-medium text-[#1E1E1E]">
+    By controlling access and maintaining standards, Arvox protects its reputation and ensures projects consistently meet skilled, reliable talent. This approach creates a healthier ecosystem where results matter more than hype.   
+    </p>
+    </div>
+
+  </div>
+</section>
+
+<section class="section min-h-screen bg-white snap-start px-6 py-32 flex items-center">
+  <div class="max-w-7xl mx-auto w-full reveal">
+
+    <!-- Headline -->
+    <div class="max-w-3xl mb-20 reveal">
+      <h2 class="text-4xl md:text-5xl font-bold text-[#0D1B2A]">
+        Who Arvox Is Built For
+      </h2>
+
+      <p class="mt-6 text-lg text-[#1E293B]">
+        Arvox isn’t a general job board. It’s a professional Web3 workspace for people who are ready to execute.
+      </p>
+    </div>
+
+    <!-- Two Column -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 reveal">
+
+      <!-- For You -->
+      <div class="card bg-[#00BFA6]/10 rounded-3xl p-10 border border-[#00BFA6]/30">
+        <h3 class="text-2xl font-bold text-[#00BFA6] mb-6">For You If You Are</h3>
+
+        <ul class="space-y-4 text-[#1E293B] text-lg">
+          <li>•  A Web3 professional with proven skills and experience</li>
+          <li>• A project looking for competent, accountable contributors</li>
+          <li>• Someone tired of noisy job boards and unreliable hiring channels</li>
+          <li>• A team that values structure, transparency, and execution</li>
+        </ul>
+      </div>
+
+      <!-- Not For You -->
+      <div class="card bg-[#FF6F61]/10 rounded-3xl p-10 border border-[#FF6F61]/30">
+        <h3 class="text-2xl font-bold text-[#FF6F61] mb-6">Not For You If You Are</h3>
+
+        <ul class="space-y-4 text-[#1E293B] text-lg">
+          <li>• Exploring Web3 casually without intent to work</li>
+          <li>• Looking for shortcuts or unverified opportunities</li>
+          <li>• Unwilling to provide proof of work or meet deadlines</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section id="waitlist" class="min-h-screen bg-[#A855F7] px-6 py-32 flex items-center">
+  <div class="max-w-5xl mx-auto w-full text-center reveal">
+
+    <h2 class="text-4xl md:text-5xl font-bold text-white">
+      Secure Your Place Before Access Closes
+    </h2>
+
+    <p class="mt-6 text-lg text-[#F3E8FF] max-w-2xl mx-auto">
+    Arvox will onboard users in phases to maintain platform quality. Early access allows you to explore the platform, complete your profile, and stay positioned as opportunities go live
+    </p>
+
+    <!-- Waitlist Box -->
+    <div class="card glow mt-16 bg-white/10 backdrop-blur rounded-3xl p-10 max-w-xl mx-auto border border-white/20 shadow-2xl">
+
+      <p class="text-white mb-6 text-lg">
+        Request an invite to join the first wave.
+      </p>
+
+      <form class="flex flex-col sm:flex-row gap-4">
+        <input
+          type="email"
+          placeholder="Enter your email"
+          class="flex-1 px-6 py-4 rounded-full outline-none text-[#1E293B]"
+        />
+
+        <button
+          type="submit"
+          class="bg-black text-white px-8 py-4 rounded-full font-medium hover:bg-[#007CF0] transition"
+        >
+          Join Waitlist
+        </button>
+      </form>
+
+      <p class="mt-6 text-sm text-[#F3E8FF]">
+        Access is limited. Invite codes will be released in waves.
+      </p>
+
+    </div>
+<p class="mt-6 text-lg text-[#F3E8FF] max-w-2xl mx-auto">
+Whether you’re a project preparing to post roles or a professional ready to apply, early access ensures you’re not left behind when access becomes limited.
+    </p>
+</p>
+  </div>
+</section>
+
+<section class="section min-h-screen bg-white snap-start px-6 py-32">
+  <div class="max-w-5xl mx-auto reveal">
+
+    <h2 class="text-4xl md:text-5xl font-bold text-[#0D1B2A] mb-16">
+      Frequently Asked Questions
+    </h2>
+
+    <div class="space-y-6">
+
+      <!-- Item -->
+      <div class="border border-black/10 rounded-2xl overflow-hidden">
+        <button class="faq-toggle w-full text-left px-8 py-6 bg-white hover:bg-black/5 flex justify-between items-center">
+          <span class="text-lg font-medium">Is Arvox guaranteed to get me a job?</span>
+          <span>+</span>
+        </button>
+        <div class="faq-content px-8 pb-6 text-[#1E293B]">
+        No. Arvox provides access to opportunities, not job guarantees. Success depends on your skills, experience, and performance.  
+        </div>
+      </div>
+
+      <div class="border border-black/10 rounded-2xl overflow-hidden">
+        <button class="faq-toggle w-full text-left px-8 py-6 bg-white hover:bg-black/5 flex justify-between items-center">
+          <span class="text-lg font-medium">How do payments work?</span>
+          <span>+</span>
+        </button>
+       <div class="faq-content px-8 pb-6 text-[#1E293B]">
+    Projects fund roles upfront. Payments are released automatically at agreed intervals (weekly or monthly).      
+    </div>
+      </div>
+
+      <div class="border border-black/10 rounded-2xl overflow-hidden">
+        <button class="faq-toggle w-full text-left px-8 py-6 bg-white hover:bg-black/5 flex justify-between items-center">
+          <span class="text-lg font-medium"> Can I withdraw earnings externally?</span>
+          <span>+</span>
+        </button>
+       <div class="faq-content px-8 pb-6 text-[#1E293B]">
+    Yes. Users must connect an external wallet to receive payouts.
+    </div>
+      </div>
+
+      <div class="border border-black/10 rounded-2xl overflow-hidden">
+        <button class="faq-toggle w-full text-left px-8 py-6 bg-white hover:bg-black/5 flex justify-between items-center">
+          <span class="text-lg font-medium">Who can post jobs and bounties?</span>
+          <span>+</span>
+        </button>
+        <div class="faq-content px-8 pb-6 text-[#1E293B]">
+          Verified Web3 projects that meet Arvox’s platform standards.  </div>
+      </div>
+
+       <div class="border border-black/10 rounded-2xl overflow-hidden">
+        <button class="faq-toggle w-full text-left px-8 py-6 bg-white hover:bg-black/5 flex justify-between items-center">
+          <span class="text-lg font-medium">Is Arvox open to beginners in Web3?</span>
+          <span>+</span>
+        </button>
+        <div class="faq-content px-8 pb-6 text-[#1E293B]">
+          Arvox is designed primarily for individuals who already understand Web3 fundamentals and can demonstrate competence through proof of work or experience. While beginners are not explicitly excluded, access and opportunity visibility favor those who are job-ready.
+  </div>
+      </div>
+        <div class="border border-black/10 rounded-2xl overflow-hidden">
+        <button class="faq-toggle w-full text-left px-8 py-6 bg-white hover:bg-black/5 flex justify-between items-center">
+          <span class="text-lg font-medium">Can projects schedule jobs or bounties ahead of launch or release time?</span>
+          <span>+</span>
+        </button>
+        <div class="faq-content px-8 pb-6 text-[#1E293B]">
+          Yes. Projects can prepare and schedule job or bounty listings in advance. Listings are published on the platform at a predetermined time to ensure fair visibility and structured releases.  </div>
+      </div>
+<div class="border border-black/10 rounded-2xl overflow-hidden">
+        <button class="faq-toggle w-full text-left px-8 py-6 bg-white hover:bg-black/5 flex justify-between items-center">
+          <span class="text-lg font-medium">What happens if a project or jobber fails to meet their obligations?</span>
+          <span>+</span>
+        </button>
+        <div class="faq-content px-8 pb-6 text-[#1E293B]">
+        If either party fails to deliver work or payment within the agreed timeframe, a report can be filed. Arvox reviews such cases and may take corrective actions, including payment holds, account restrictions, or access removal, depending on the situation 
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<footer class="bg-[#0D1B2A] snap-start text-white px-6 py-20">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+
+    <!-- Brand -->
+    <div>
+      <h3 class="text-2xl font-bold mb-4">Arvox</h3>
+      <p class="text-white/70 max-w-sm">
+    Arvox is a Web3 hiring and opportunity platform built for execution, accountability, and real outcomes.   
+    </p>
+    </div>
+
+    <!-- Links -->
+    <div>
+      <h4 class="font-semibold mb-4">Platform</h4>
+      <ul class="space-y-2 text-white/70">
+        <li><a href="#" class="hover:text-white">How it Works</a></li>
+        <li><a href="#" class="hover:text-white">Jobs</a></li>
+        <li><a href="#" class="hover:text-white">Payments</a></li>
+        <li><a href="#" class="hover:text-white">FAQ</a></li>
+      </ul>
+    </div>
+
+    <!-- Legal / Social -->
+    <div>
+      <h4 class="font-semibold mb-4">Legal</h4>
+      <ul class="space-y-2 text-white/70">
+        <li><a href="#" class="hover:text-white">Terms & Conditions</a></li>
+        <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+      </ul>
+
+      <div class="flex gap-4 mt-6 text-white/70">
+        <a href="#" class="hover:text-white">X</a>
+        <a href="#" class="hover:text-white">Discord</a>
+        <a href="#" class="hover:text-white">Telegram</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="mt-16 text-center text-white/50 text-sm">
+    © 2026 Arvox. All rights reserved.
+  </div>
+</footer>
+
+
+<script>
+  let lastScroll = 0;
+  const nav = document.getElementById("navbar");
+
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll > lastScroll && currentScroll > 100) {
+      nav.classList.add("opacity-0", "-translate-y-6", "pointer-events-none");
+    } else {
+      nav.classList.remove("opacity-0", "-translate-y-6", "pointer-events-none");
+    }
+
+    lastScroll = currentScroll;
+  });
+
+ const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("active");
+      entry.target.classList.add("visible");
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll(".reveal, .section").forEach(el => {
+  revealObserver.observe(el);
+});
+
+
+  const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+const particles = Array.from({ length: 60 }, () => ({
+  x: Math.random() * canvas.width,
+  y: Math.random() * canvas.height,
+  size: Math.random() * 2 + 1,
+  speedX: (Math.random() - 0.5) * 0.3,
+  speedY: (Math.random() - 0.5) * 0.3
+}));
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  particles.forEach(p => {
+    p.x += p.speedX;
+    p.y += p.speedY;
+
+    if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(255,255,255,0.4)";
+    ctx.fill();
+  });
+
+  requestAnimationFrame(animate);
+}
+animate();
+
+document.querySelectorAll(".faq-toggle").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const content = btn.nextElementSibling;
+if (content.classList.contains("open")) {
+  content.style.maxHeight = "0px";
+  content.classList.remove("open");
+} else {
+     document.querySelectorAll(".faq-content").forEach(c => {
+  c.style.maxHeight = "0px";
+  c.classList.remove("open");
+      });
+
+      content.style.maxHeight = content.scrollHeight + "px";
+      content.classList.add("open");
+    }
+  });
+});
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
+  loader.style.transition = "opacity 1s ease";
+  loader.style.opacity = "0";
+
+  setTimeout(() => {
+    loader.remove();
+  }, 1000);
+});
+document.querySelectorAll("a, button").forEach(el => {
+  el.addEventListener("mousemove", e => {
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    el.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+  });
+
+  el.addEventListener("mouseleave", () => {
+    el.style.transform = "translate(0,0)";
+  });
+});
+
+document.querySelectorAll(".card").forEach(card => {
+  card.addEventListener("mousemove", e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / centerY) * 8;
+    const rotateY = ((x - centerX) / centerX) * -8;
+
+    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+  });
+
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "rotateX(0) rotateY(0) scale(1)";
+  });
+});
+
+</script>
+</body>
+</html>
