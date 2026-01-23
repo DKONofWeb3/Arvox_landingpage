@@ -131,21 +131,30 @@
   </div>
 
   <!-- Mobile expanded content (inside same pill) -->
-  <div
-    id="navExpanded"
-    class="md:hidden mt-4 hidden flex-col gap-3 text-sm border-t border-black/10 pt-4"
-  >
-    <a href="#how-it-works" class="py-1">How it works</a>
-    <a href="#" class="py-1">Jobs</a>
-    <a href="#" class="py-1">Payments</a>
-    <a href="#faq" class="py-1">FAQ</a>
+<div
+  id="navExpanded"
+  class="md:hidden hidden absolute right-4 top-full mt-3
+         bg-white/90 backdrop-blur-xl
+         border border-black/10 shadow-xl
+         rounded-2xl
+         w-48
+         p-4
+         flex flex-col gap-3
+         text-sm text-slate-800"
+>
 
-    <a
-      href="#waitlist"
-      class="mt-2 bg-black text-white text-center px-4 py-3 rounded-full"
-    >
-      Join waitlist
-    </a>
+<a href="#how-it-works" class="hover:text-black">How it works</a>
+<a href="#" class="hover:text-black">Jobs</a>
+<a href="#" class="hover:text-black">Payments</a>
+<a href="#faq" class="hover:text-black">FAQ</a>
+
+<a
+  href="#waitlist"
+  class="mt-2 bg-black text-white text-center px-4 py-2 rounded-full text-sm"
+>
+  Join waitlist
+</a>
+
   </div>
 </nav>
 
@@ -930,5 +939,6 @@ document.querySelectorAll(".card").forEach(card => {
 </body>
 
 </html>
+
 
 
