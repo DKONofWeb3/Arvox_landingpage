@@ -915,8 +915,20 @@ document.querySelectorAll(".card").forEach(card => {
   });
 });
 
+    const navToggle = document.getElementById("navToggle");
+  const navExpanded = document.getElementById("navExpanded");
+  const navChevron = document.getElementById("navChevron");
+
+  if (navToggle && navExpanded) {
+    navToggle.addEventListener("click", () => {
+      navExpanded.classList.toggle("hidden");
+      navChevron.classList.toggle("rotate-180");
+    });
+  }
+
 </script>
 </body>
 
 </html>
+
 
