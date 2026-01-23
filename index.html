@@ -97,15 +97,58 @@
   <div class="blob bg-white/10 w-[700px] h-[700px] bottom-[-300px] left-[20%]"></div>
 </div>
 <canvas id="particles" class="fixed inset-0 -z-10"></canvas>
-   <nav id="navbar" class="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 bg-white/70 backdrop-blur-xl border border-black/10 shadow-xl rounded-full px-4 md:px-6 py-2 md:py-3 transition-all duration-300">
- <div class="flex items-center gap-4 md:gap-8 text-sm font-medium text-slate-800">
-    <div class="font-bold">Arvox</div>
- <a href="#" class="hover:text-black hidden md:block">How it works</a>
-<a href="#" class="hover:text-black hidden md:block">Jobs</a>
-<a href="#" class="hover:text-black hidden md:block">Payments</a>
-  <a href="#" class="bg-black text-white px-3 md:px-4 py-1.5 md:py-2 rounded-full text-sm">Join waitlist</a>
+<nav
+  id="navbar"
+  class="fixed top-4 left-1/2 -translate-x-1/2 z-50
+         bg-white/80 backdrop-blur-xl
+         border border-black/10 shadow-xl
+         rounded-2xl md:rounded-full
+         px-4 md:px-6 py-3
+         transition-all duration-300 w-[92%] md:w-auto"
+>
+  <!-- Top row -->
+  <div class="flex items-center justify-between gap-4 text-sm font-medium text-slate-800">
+    <div class="font-bold text-base">Arvox</div>
+
+    <!-- Desktop links -->
+    <div class="hidden md:flex items-center gap-6">
+      <a href="#how-it-works" class="hover:text-black">How it works</a>
+      <a href="#" class="hover:text-black">Jobs</a>
+      <a href="#" class="hover:text-black">Payments</a>
+      <a href="#waitlist" class="bg-black text-white px-4 py-2 rounded-full">
+        Join waitlist
+      </a>
+    </div>
+
+    <!-- Mobile toggle -->
+    <button
+      id="navToggle"
+      class="md:hidden flex items-center gap-1 text-xs border border-black/20 px-3 py-1.5 rounded-full"
+    >
+      Menu
+      <span id="navChevron" class="transition-transform">⌄</span>
+    </button>
+  </div>
+
+  <!-- Mobile expanded content (inside same pill) -->
+  <div
+    id="navExpanded"
+    class="md:hidden mt-4 hidden flex-col gap-3 text-sm border-t border-black/10 pt-4"
+  >
+    <a href="#how-it-works" class="py-1">How it works</a>
+    <a href="#" class="py-1">Jobs</a>
+    <a href="#" class="py-1">Payments</a>
+    <a href="#faq" class="py-1">FAQ</a>
+
+    <a
+      href="#waitlist"
+      class="mt-2 bg-black text-white text-center px-4 py-3 rounded-full"
+    >
+      Join waitlist
+    </a>
   </div>
 </nav>
+
 <section class="section min-h-screen bg-[#5DE0E6] snap-start flex items-center justify-center px-6 pt-32">
   <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center reveal">
 
@@ -716,8 +759,8 @@ Whether you’re a project preparing to post roles or a professional ready to ap
     <div>
       <h4 class="font-semibold mb-4">Legal</h4>
       <ul class="space-y-2 text-white/70">
-        <li><a href="#" class="hover:text-white">Terms & Conditions</a></li>
-        <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+        <li><a href="terms.html" class="hover:text-white">Terms & Conditions</a></li>
+        <li><a href="privacy.html" class="hover:text-white">Privacy Policy</a></li>
       </ul>
 
      <div class="flex gap-4 mt-6 text-white/70">
@@ -836,18 +879,21 @@ window.addEventListener("load", () => {
     loader.remove();
   }, 1000);
 });
-document.querySelectorAll("a, button").forEach(el => {
-  el.addEventListener("mousemove", e => {
-    const rect = el.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    el.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
-  });
+if (window.innerWidth > 768) {
+  document.querySelectorAll("a, button").forEach(el => {
+    el.addEventListener("mousemove", e => {
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      el.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+    });
 
-  el.addEventListener("mouseleave", () => {
-    el.style.transform = "translate(0,0)";
+    el.addEventListener("mouseleave", () => {
+      el.style.transform = "translate(0,0)";
+    });
   });
-});
+}
+
 
 document.querySelectorAll(".card").forEach(card => {
   card.addEventListener("mousemove", e => {
